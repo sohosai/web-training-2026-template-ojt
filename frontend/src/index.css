@@ -1,6 +1,7 @@
 :root {
-  font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Sans",
-    "Yu Gothic UI", sans-serif;
+  font-family:
+    system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Yu Gothic UI",
+    sans-serif;
   line-height: 1.6;
   color-scheme: light dark;
 }

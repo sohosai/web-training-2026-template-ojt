@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 
 type User = {
   id: number;
