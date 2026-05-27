@@ -9,7 +9,7 @@ backend/   - Hono + Drizzle (MySQL) + Docker
 frontend/  - Vite + React + TypeScript
 ```
 
-それぞれ独立した pnpm プロジェクトです。詳細は各ディレクトリの README を参照。
+それぞれ独立した npm プロジェクトです。詳細は各ディレクトリの README を参照。
 
 ## クイックスタート
 
@@ -21,7 +21,7 @@ frontend/  - Vite + React + TypeScript
 cd backend
 docker compose up --build
 # 別ターミナルで初回だけ
-docker compose exec app pnpm db:push
+docker compose exec app npm run db:push
 ```
 
 - API: http://localhost:3000
@@ -31,8 +31,8 @@ docker compose exec app pnpm db:push
 
 ```bash
 cd frontend
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
 
 - http://localhost:5173

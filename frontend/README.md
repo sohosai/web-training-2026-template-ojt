@@ -11,8 +11,8 @@ Vite + React + TypeScript のフロントエンドテンプレート。
 ## 開発の始め方
 
 ```bash
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
 
 http://localhost:5173 で起動します。
@@ -25,7 +25,7 @@ backend (http://localhost:3000) に転送されます。
 
 | コマンド | 内容 |
 | --- | --- |
-| `pnpm dev` | Vite dev server を起動 |
-| `pnpm build` | プロダクションビルド |
-| `pnpm preview` | ビルド結果のプレビュー |
-| `pnpm typecheck` | 型チェック |
+| `npm run dev` | Vite dev server を起動 |
+| `npm run build` | プロダクションビルド |
+| `npm run preview` | ビルド結果のプレビュー |
+| `npm run typecheck` | 型チェック |

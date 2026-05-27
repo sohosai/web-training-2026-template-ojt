@@ -23,7 +23,7 @@ docker compose up --build
 初回はスキーマがまだ DB に反映されていないので、別ターミナルで:
 
 ```bash
-docker compose exec app pnpm db:push
+docker compose exec app npm run db:push
 ```
 
 ### 2. ローカル Node + Docker DB で起動する
@@ -31,23 +31,23 @@ docker compose exec app pnpm db:push
 ```bash
 docker compose up -d db phpmyadmin
 cp .env.example .env
-pnpm install
-pnpm db:push
-pnpm dev
+npm install
+npm run db:push
+npm run dev
 ```
 
 ## スクリプト
 
 | コマンド | 内容 |
 | --- | --- |
-| `pnpm dev` | `tsx watch` で開発サーバ起動 |
-| `pnpm build` | TypeScript を `dist/` にコンパイル |
-| `pnpm start` | コンパイル済み JS を起動 |
-| `pnpm typecheck` | 型チェックのみ |
-| `pnpm db:generate` | スキーマからマイグレーションを生成 |
-| `pnpm db:push` | スキーマを DB にそのまま反映（開発用） |
-| `pnpm db:migrate` | 生成済みマイグレーションを適用 |
-| `pnpm db:studio` | Drizzle Studio を起動 |
+| `npm run dev` | `tsx watch` で開発サーバ起動 |
+| `npm run build` | TypeScript を `dist/` にコンパイル |
+| `npm start` | コンパイル済み JS を起動 |
+| `npm run typecheck` | 型チェックのみ |
+| `npm run db:generate` | スキーマからマイグレーションを生成 |
+| `npm run db:push` | スキーマを DB にそのまま反映（開発用） |
+| `npm run db:migrate` | 生成済みマイグレーションを適用 |
+| `npm run db:studio` | Drizzle Studio を起動 |
 
 ## ディレクトリ
 
