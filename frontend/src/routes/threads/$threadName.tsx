@@ -234,7 +234,7 @@ function ThreadPage() {
                 </div>
 
                 <span style={{ marginLeft: "0.10rem", fontSize: "15px" }}>
-                  {m.count}
+                  {likedIds.has(m.id) ? m.count + 1 : m.count}
                 </span>
                 <svg
                   aria-hidden="true"
