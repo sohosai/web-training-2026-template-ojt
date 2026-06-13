@@ -24,8 +24,8 @@ userRoutes.post("/", async (c) => {
     return c.json({ error: "invalid user credentials" }, 401);
   }
   const [result] = await db.insert(Users).values({
-      name: body.userName,
-      password: body.password,
-    });
+    name: body.userName,
+    password: body.password,
+  });
   return c.json({ message: "User created successfully" }, 201);
 });

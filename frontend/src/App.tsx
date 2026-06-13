@@ -78,12 +78,10 @@ export default function App() {
     if (res.ok) {
       setError(null);
       alert("ユーザーが作成されました！");
-      
     } else if (res.status === 401) {
       setError("このユーザー名は既に使用されています");
       alert("このユーザー名は既に使用されています");
-    }
-    else {
+    } else {
       setError(`ユーザーの作成に失敗しました: ${res.status}`);
       alert("ユーザーの作成に失敗しました");
     }
