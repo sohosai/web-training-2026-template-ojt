@@ -15,6 +15,7 @@ export default function App() {
   }>({ ok: false, body: null });
   const [messages, setMessages] = useState<Message[]>([]);
   const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [thread, setThread] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -57,7 +58,7 @@ export default function App() {
     const res = await fetch("/api/messages", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ thread, message, userName }),
+      body: JSON.stringify({ thread, password, message, userName }),
     });
     if (!res.ok) {
       setError(`POST failed: ${res.status}`);
@@ -149,6 +150,12 @@ export default function App() {
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
             placeholder="名前"
+            required
+          />
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="パスワード"
             required
           />
           <input
