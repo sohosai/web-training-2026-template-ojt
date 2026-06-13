@@ -73,7 +73,7 @@ export default function App() {
     const res = await fetch("/api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({userName, password}),
+      body: JSON.stringify({ userName, password }),
     });
     if (!res.ok) {
       setError(`POST failed: ${res.status}`);
@@ -129,14 +129,15 @@ export default function App() {
             marginBottom: "1rem",
           }}
         >
-        <h2>初回登録はこちら</h2>
-        <input
+          <h2>初回登録はこちら</h2>
+          <input
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
             placeholder="名前"
             required
           />
-          <input type="password"
+          <input
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="パスワード"
