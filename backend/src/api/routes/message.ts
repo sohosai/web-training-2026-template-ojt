@@ -16,7 +16,17 @@ export const userRoutes = new Hono();
 
 messageRoutes.get("/", async (c) => {
   const rows = await db.select().from(messages);
-  return c.json(rows);
+  return c.json(
+    rows.map((row) => {
+      return {
+        id: row.id,
+        message: row.message,
+        userName: row.userName,
+        count: row.favoriteCount,
+        createdAt: row.createdAt,
+      };
+    }),
+  );
 });
 
 userRoutes.get("/", async (d) => {
