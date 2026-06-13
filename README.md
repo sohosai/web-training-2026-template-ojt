@@ -20,8 +20,7 @@ frontend/  - Vite + React + TypeScript
 ```bash
 cd backend
 docker compose up --build
-# 別ターミナルで初回だけ
-docker compose exec app npm run db:push
+# 初回起動時にマイグレーションが自動で適用される
 ```
 
 - API: http://localhost:3000
