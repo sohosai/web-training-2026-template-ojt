@@ -4,3 +4,8 @@ export type MessageRequest = {
   userName: string;
   password: string;
 };
+
+export type SignupRequest = {
+  userName: string;
+  password: string;
+};
