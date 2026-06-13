@@ -1,9 +1,10 @@
-import { type FormEvent, useEffect, useState } from "react";
+import React, { type FormEvent, useEffect, useState } from "react";
 
 type Message = {
   id: number;
   message: string;
   userName: string;
+  password: string;
   thread: string;
   createdAt: string;
 };
@@ -15,6 +16,7 @@ export default function App() {
   }>({ ok: false, body: null });
   const [messages, setMessages] = useState<Message[]>([]);
   const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [thread, setThread] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -57,7 +59,7 @@ export default function App() {
     const res = await fetch("/api/messages", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({thread, message, userName}),
+      body: JSON.stringify({ thread, password, message, userName }),
     });
     if (!res.ok) {
       setError(`POST failed: ${res.status}`);
@@ -66,10 +68,30 @@ export default function App() {
     setMessage("");
     loadMessages();
   };
-  const new_messages = Array.from(new Map(messages.map(item => [item.thread, item])).values());
+  const createUser = async (e: FormEvent) => {
+    e.preventDefault();
+    const res = await fetch("/api/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({userName, password}),
+    });
+    if (!res.ok) {
+      setError(`POST failed: ${res.status}`);
+      return;
+    }
+    setMessage("");
+    loadMessages();
+  };
+  const new_messages = Array.from(
+    new Map(messages.map((item) => [item.thread, item])).values(),
+  );
   return (
     <main style={{ maxWidth: 640, margin: "2rem auto", padding: "0 1rem" }}>
-      <h1 style= {{background:"linear-gradient(transparent 70%, #e1e135b1 0%)"}}>匿名掲示板「0ちゃんねる」</h1>
+      <h1
+        style={{ background: "linear-gradient(transparent 70%, #e1e135b1 0%)" }}
+      >
+        匿名掲示板「0ちゃんねる」
+      </h1>
 
       <section
         style={{
@@ -97,6 +119,33 @@ export default function App() {
       </section>
 
       <section>
+        <form
+          onSubmit={createUser}
+          style={{
+            padding: "20px 0 0 0",
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.5rem",
+            marginBottom: "1rem",
+          }}
+        >
+        <h2>初回登録はこちら</h2>
+        <input
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            placeholder="名前"
+            required
+          />
+          <input type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="パスワード"
+            required
+          />
+          <button type="submit" style={{ alignSelf: "flex-start" }}>
+            登録
+          </button>
+        </form>
         <h2>スレッド一覧</h2>
         <div id="thread-list">
           {error === "404" ? ( //new
@@ -108,16 +157,20 @@ export default function App() {
               ) : (
                 //const uniqueArray = Array.from(new Set(m.thread for m in messages));
                 //const new_massages = Array.from(new Map(messages.map(item => [item.thread, item])).values());
-                new_messages.map((m, index) => (
-                  <>
-                  <p></p>
-                  <a
-                    href={`/threads/${m.thread}`}
-                    style={{ margin: "0.5rem 0 0", whiteSpace: "pre-wrap" ,textDecoration: "none"}}
-                    key={`threadlink-${index}`}
-                  >
-                    {m.thread}
-                  </a></>
+                new_messages.map((m) => (
+                  <React.Fragment key={m.thread}>
+                    <p></p>
+                    <a
+                      href={`/threads/${m.thread}`}
+                      style={{
+                        margin: "0.5rem 0 0",
+                        whiteSpace: "pre-wrap",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {m.thread}
+                    </a>
+                  </React.Fragment>
                 ))
               )}
             </ul>
@@ -138,6 +191,12 @@ export default function App() {
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
             placeholder="名前"
+            required
+          />
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="パスワード"
             required
           />
           <input
