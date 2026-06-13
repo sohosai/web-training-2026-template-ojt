@@ -35,34 +35,11 @@ function ThreadPage() {
 
   return (
     <main style={{ maxWidth: 640, margin: "2rem auto", padding: "0 1rem" }}>
-      <Link
-        to="/"
-        style={{
-          fontSize: "0.875rem",
-          padding: "5px",
-          color: "black",
-          backgroundColor: "#cccccc",
-          textDecoration: "none",
-          borderRadius: "3px",
-        }}
-      >
+      <Link to="/" style={{ fontSize: "0.875rem" ,padding:"5px",color:"black" ,backgroundColor:"#cccccc",textDecoration: "none", borderRadius: "3px"}}>
         ← 一覧に戻る
       </Link>
       <h1 style={{ marginTop: "0.75rem" }}>スレッド: {threadName}</h1>
-      <Link
-        to="/"
-        style={{
-          position: "absolute",
-          bottom: "20px",
-          padding: "10px",
-          color: "white",
-          backgroundColor: "#ff6347",
-          textDecoration: "none",
-          borderRadius: "3px",
-        }}
-      >
-        スレッドを削除
-      </Link>
+      <Link to="/" style={{ position:"absolute",bottom:"20px",padding:"10px",color:"white" ,backgroundColor:"#ff6347",textDecoration: "none", borderRadius: "3px" }}>スレッドを削除</Link>
       {error ? (
         <p style={{ color: "crimson" }}>{error}</p>
       ) : messages.length === 0 ? (

@@ -57,7 +57,7 @@ export default function App() {
     const res = await fetch("/api/messages", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ thread, message, userName }),
+      body: JSON.stringify({thread, message, userName}),
     });
     if (!res.ok) {
       setError(`POST failed: ${res.status}`);
@@ -66,16 +66,10 @@ export default function App() {
     setMessage("");
     loadMessages();
   };
-  const new_messages = Array.from(
-    new Map(messages.map((item) => [item.thread, item])).values(),
-  );
+  const new_messages = Array.from(new Map(messages.map(item => [item.thread, item])).values());
   return (
     <main style={{ maxWidth: 640, margin: "2rem auto", padding: "0 1rem" }}>
-      <h1
-        style={{ background: "linear-gradient(transparent 70%, #e1e135b1 0%)" }}
-      >
-        匿名掲示板「0ちゃんねる」
-      </h1>
+      <h1 style= {{background:"linear-gradient(transparent 70%, #e1e135b1 0%)"}}>匿名掲示板「0ちゃんねる」</h1>
 
       <section
         style={{
@@ -116,19 +110,14 @@ export default function App() {
                 //const new_massages = Array.from(new Map(messages.map(item => [item.thread, item])).values());
                 new_messages.map((m, index) => (
                   <>
-                    <p></p>
-                    <a
-                      href={`/threads/${m.thread}`}
-                      style={{
-                        margin: "0.5rem 0 0",
-                        whiteSpace: "pre-wrap",
-                        textDecoration: "none",
-                      }}
-                      key={`threadlink-${index}`}
-                    >
-                      {m.thread}
-                    </a>
-                  </>
+                  <p></p>
+                  <a
+                    href={`/threads/${m.thread}`}
+                    style={{ margin: "0.5rem 0 0", whiteSpace: "pre-wrap" ,textDecoration: "none"}}
+                    key={`threadlink-${index}`}
+                  >
+                    {m.thread}
+                  </a></>
                 ))
               )}
             </ul>
