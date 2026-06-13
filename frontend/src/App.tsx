@@ -66,6 +66,7 @@ export default function App() {
     setMessage("");
     loadMessages();
   };
+
   const new_messages = Array.from(new Map(messages.map(item => [item.thread, item])).values());
   return (
     <main style={{ maxWidth: 640, margin: "2rem auto", padding: "0 1rem" }}>
