@@ -1,6 +1,5 @@
 import { and, eq } from "drizzle-orm";
 import { Hono } from "hono";
-// biome-ignore lint/correctness/noUnusedImports: チュートリアルで使うため残す
 import { db } from "../../db/client.js";
 
 import { Users } from "../../db/schema.js";
