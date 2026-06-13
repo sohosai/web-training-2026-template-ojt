@@ -40,6 +40,8 @@ services:
       DATABASE_URL: mysql://app:app@db:3306/app
       PORT: 3000
 
+    command: sh -c "npm run db:migrate && npm run dev"
+
     ports:
       - "3000:3000"
 

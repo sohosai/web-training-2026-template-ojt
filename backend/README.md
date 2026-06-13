@@ -20,10 +20,14 @@ docker compose up --build
 - API: http://localhost:3000
 - phpMyAdmin: http://localhost:8080 （root / root）
 
-初回はスキーマがまだ DB に反映されていないので、別ターミナルで:
+`app` コンテナは起動時に `db:migrate` を自動実行するので、初回起動時に
+`drizzle/` のマイグレーションが DB に適用される。手動でのスキーマ反映は不要。
+
+スキーマ（`src/db/schema.ts`）を変更したら、マイグレーションを生成してから再起動する:
 
 ```bash
-docker compose exec app npm run db:push
+npm run db:generate
+docker compose up --build
 ```
 
 ### 2. ローカル Node + Docker DB で起動する
