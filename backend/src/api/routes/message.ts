@@ -1,14 +1,7 @@
-// biome-ignore lint/correctness/noUnusedImports: チュートリアルで使うため残す
 import { and, eq } from "drizzle-orm";
 import { Hono } from "hono";
-// biome-ignore lint/correctness/noUnusedImports: チュートリアルで使うため残す
 import { db } from "../../db/client.js";
-// biome-ignore lint/correctness/noUnusedImports: チュートリアルで使うため残す
-import { messages } from "../../db/schema.js";
-
-// biome-ignore lint/correctness/noUnusedImports: チュートリアルで使うため残す
-
-import { Users } from "../../db/schema.js";
+import { messages, Users } from "../../db/schema.js";
 import type { MessageRequest } from "../models/message.js";
 
 export const messageRoutes = new Hono();
