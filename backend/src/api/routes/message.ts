@@ -20,6 +20,7 @@ messageRoutes.get("/", async (c) => {
         userName: row.userName,
         count: row.favoriteCount,
         createdAt: row.createdAt,
+        thread: row.thread
       };
     }),
   );
