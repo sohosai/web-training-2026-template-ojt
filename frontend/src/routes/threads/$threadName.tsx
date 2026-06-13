@@ -46,7 +46,7 @@ function ThreadPage() {
       try {
         const res = await fetch("/api/messages");
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-         const all: Message[] = await res.json()
+        const all: Message[] = await res.json();
         //   (m: Omit<Message, "count">) => ({ ...m, count: 9000 }),
         // );
         setMessages(all.filter((m) => m.thread === threadName));
