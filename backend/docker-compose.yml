@@ -37,7 +37,7 @@ services:
       target: dev
     restart: unless-stopped
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: mysql://app:app@db:3306/app
       PORT: 3000
 
     ports:
