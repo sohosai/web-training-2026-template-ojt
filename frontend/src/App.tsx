@@ -75,12 +75,18 @@ export default function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({userName, password}),
     });
-    if (!res.ok) {
-      setError(`POST failed: ${res.status}`);
-      return;
+    if (res.ok) {
+      setError(null);
+      alert("ユーザーが作成されました！");
+      
+    } else if (res.status === 401) {
+      setError("このユーザー名は既に使用されています");
+      alert("このユーザー名は既に使用されています");
     }
-    setMessage("");
-    loadMessages();
+    else {
+      setError(`ユーザーの作成に失敗しました: ${res.status}`);
+      alert("ユーザーの作成に失敗しました");
+    }
   };
   const new_messages = Array.from(
     new Map(messages.map((item) => [item.thread, item])).values(),
