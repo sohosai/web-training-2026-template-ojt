@@ -6,30 +6,34 @@ import { db } from "../../db/client.js";
 // biome-ignore lint/correctness/noUnusedImports: チュートリアルで使うため残す
 import { messages } from "../../db/schema.js";
 // biome-ignore lint/correctness/noUnusedImports: チュートリアルで使うため残す
-import type { MessageRequest } from "../models/message.js";
 
-export const messageRoutes = new Hono();
+export const favoriteRoutes = new Hono();
 
-messageRoutes.get("/", async (c) => {
+favoriteRoutes.get("/", async (c) => {
   const rows = await db.select().from(messages);
   return c.json(rows);
 });
 
-messageRoutes.post("/", async (c) => {
-  const body = await c.req.json<MessageRequest>();
-  console.log(body);
-  if (!body?.message || !body?.userName || !body?.thread) {
-    return c.json({ error: "invalid format" }, 400);
-  }
+favoriteRoutes.post("/:id/favorite", async (c) => {
+  const { id } = c.req.param();
+  console.log("Received request to favorite message with ID:", id);
 
-  const [result] = await db.insert(messages).values({
-    message: body.message,
-    userName: body.userName,
-    thread: body.thread, // Assuming you want to include the thread ID
-  });
+  const rows = await db
+    .select()
+    .from(messages)
+    .where(eq(messages.id, Number(id)));
+  if (rows[0] === undefined) {
+    return c.json({ error: "Message not found" }, 404);
+  }
+  const [result] = await db
+    .update(messages)
+    .set({
+      favoriteCount: rows[0].favoriteCount + 1,
+    })
+    .where(eq(messages.id, Number(id)));
   const [created] = await db
     .select()
     .from(messages)
-    .where(eq(messages.id, result.insertId));
+    .where(eq(messages.id, Number(id)));
   return c.json(created, 201);
 });
